@@ -10,7 +10,17 @@ const connection = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
+  async function testDBConnection() {
+    try {
+        const conn = await connection.getConnection();
+        console.log("✅ Database connected successfully");
 
+        conn.release(); // return connection to pool
+    } catch (error) {
+        console.error("❌ Database connection failed:");
+        console.error(error.message);
+    }
+}
 export default connection;
 
  // host: process.env.DB_HOST || 'report.mangotracking.com',
