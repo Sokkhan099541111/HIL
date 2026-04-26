@@ -1,11 +1,16 @@
 import mysql from 'mysql2/promise';
 
- host: process.env.DB_HOST || '192.250.235.126',
- user: process.env.DB_USER || 'mangotracking_api',
- password: process.env.DB_PASSWORD || 'Sok@$#$2026',
- database: process.env.DB_NAME || 'mangotracking_api',
+const connection = mysql.createPool({
+    host: process.env.DB_HOST || '192.250.235.126',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
-  // host: process.env.DB_HOST || '74.48.72.98',
+
 export default connection;
 
  // host: process.env.DB_HOST || 'report.mangotracking.com',
